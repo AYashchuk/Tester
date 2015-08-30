@@ -9,16 +9,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame {
-    static UserDao userDao = new UserDaoImpl();
+    private UserDao userDao = new UserDaoImpl();
     private JButton cancel;
     private JButton ok;
     private JPasswordField passwordField;
     private JTextField loginField;
+    private JButton reg;
     private CurrentActionListener actionListener = new CurrentActionListener();
+    private static LoginFrame loginFrame;
 
+    public static LoginFrame getInstance(){
+        if(loginFrame == null){
+            loginFrame = new LoginFrame();
+            return loginFrame;
+        }else
+        return loginFrame;
+    }
 
-    public LoginFrame() {
-        super("Вход в систему");
+    private LoginFrame() {
+        super("Enter in Tester system");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setContentPane(setContent());
@@ -35,6 +44,8 @@ public class LoginFrame extends JFrame {
         box1.add(loginLabel);
         box1.add(Box.createHorizontalStrut(6));
         box1.add(loginField);
+
+
         // Настраиваем вторую горизонтальную панель (для ввода пароля)
         Box box2 = Box.createHorizontalBox();
         JLabel passwordLabel = new JLabel("Password:");
@@ -42,16 +53,22 @@ public class LoginFrame extends JFrame {
         box2.add(passwordLabel);
         box2.add(Box.createHorizontalStrut(6));
         box2.add(passwordField);
+
+
         // Настраиваем третью горизонтальную панель (с кнопками)
         Box box3 = Box.createHorizontalBox();
         ok = new JButton("OK");
         ok.addActionListener(actionListener);
         cancel = new JButton("Cancel");
         cancel.addActionListener(actionListener);
+        reg = new JButton("Registration");
+        reg.addActionListener(actionListener);
         box3.add(Box.createHorizontalGlue());
         box3.add(ok);
         box3.add(Box.createHorizontalStrut(12));
         box3.add(cancel);
+        box3.add(reg);
+
         // Уточняем размеры компонентов
         loginLabel.setPreferredSize(passwordLabel.getPreferredSize());
         // Размещаем три горизонтальные панели на одной вертикальной
@@ -66,8 +83,7 @@ public class LoginFrame extends JFrame {
     }
 
     public static void main(String [] args){
-        new LoginFrame();
-        //userDao.create(new User("Andrew","Yashchuk","andrew","14892"));
+        getInstance();
     }
 
 
@@ -76,12 +92,17 @@ public class LoginFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-               if( ((JButton)e.getSource()) == (ok)){
-                   System.out.println("ok");
+            if (((JButton) e.getSource()) == ok) {
+                System.out.println("ok");
 
-            }else{
-                   System.out.println("cancel");
-               }
+            }
+            if (((JButton) e.getSource()) == cancel) {
+                System.exit(0);
+            }
+            if( ((JButton)e.getSource()) == reg){
+                getInstance().setVisible(false);
+                RegistretionFrame.getInstance().setVisible(true);
+            }
         }
     }
 }
