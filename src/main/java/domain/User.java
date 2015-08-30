@@ -61,6 +61,10 @@ public class User {
         return login;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getPassword() {
         return password;
     }

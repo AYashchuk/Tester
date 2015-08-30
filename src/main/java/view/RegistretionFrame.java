@@ -139,15 +139,27 @@ public class RegistretionFrame extends JFrame {
 
     private void checkCorectData(String pass,String firstName,String lastName,String login) throws IncorectDataUserInputException {
         if(pass.toCharArray().length == 0){
-            state.setText("State: password is short");
-            throw new IncorectDataUserInputException();
+            state.setText("State: field password is empty");
+            throw new IncorectDataUserInputException("State: field password is empty");
+        }
+        if(firstName.toCharArray().length == 0){
+            state.setText("State: field first name is empty");
+            throw new IncorectDataUserInputException("State: field password is empty");
+        }
+        if(lastName.toCharArray().length == 0){
+            state.setText("State: field last name is empty");
+            throw new IncorectDataUserInputException("State: field password is empty");
+        }
+        if(login.toCharArray().length == 0){
+            state.setText("State: field login is empty");
+            throw new IncorectDataUserInputException("State: field password is empty");
         }
         if(pass.toCharArray().length <=4){
             state.setText("State: password is short");
-            throw new IncorectDataUserInputException();
+            throw new IncorectDataUserInputException("State: password is short");
         }if(login.toCharArray().length <=4){
             state.setText("State: login is short");
-            throw new IncorectDataUserInputException();
+            throw new IncorectDataUserInputException("State: login is short");
         }
 
     }

@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame {
     private UserDao userDao = new UserDaoImpl();
-    private JButton cancel;
+    private JButton exit;
     private JButton ok;
     private JPasswordField passwordField;
     private JTextField loginField;
@@ -59,14 +59,14 @@ public class LoginFrame extends JFrame {
         Box box3 = Box.createHorizontalBox();
         ok = new JButton("OK");
         ok.addActionListener(actionListener);
-        cancel = new JButton("Cancel");
-        cancel.addActionListener(actionListener);
+        exit = new JButton("Exit");
+        exit.addActionListener(actionListener);
         reg = new JButton("Registration");
         reg.addActionListener(actionListener);
         box3.add(Box.createHorizontalGlue());
         box3.add(ok);
         box3.add(Box.createHorizontalStrut(12));
-        box3.add(cancel);
+        box3.add(exit);
         box3.add(reg);
 
         // Уточняем размеры компонентов
@@ -96,7 +96,7 @@ public class LoginFrame extends JFrame {
                 System.out.println("ok");
 
             }
-            if (((JButton) e.getSource()) == cancel) {
+            if (((JButton) e.getSource()) == exit) {
                 System.exit(0);
             }
             if( ((JButton)e.getSource()) == reg){
