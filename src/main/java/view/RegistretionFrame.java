@@ -22,13 +22,17 @@ public class RegistretionFrame extends JFrame {
     private JTextField loginField;
     private JTextField secondNameField;
     private JLabel state;
+    private JProgressBar progressBar;
     private CurrentActionListener actionListener = new CurrentActionListener();
 
     private RegistretionFrame() throws HeadlessException {
         super("Registration in Tester");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         setVisible(true);
-        setContentPane(setContent());
+        getContentPane().add(setContent(), BorderLayout.NORTH);
+        getContentPane().add(state, BorderLayout.CENTER);
+        getContentPane().add(progressBar, BorderLayout.SOUTH);
         pack();
     }
 
@@ -41,7 +45,7 @@ public class RegistretionFrame extends JFrame {
         box1.add(Box.createHorizontalStrut(6));
         box1.add(loginField);
 
-        // Настраиваем первую горизонтальную панель (для ввода логина)
+        // Настраиваем Вторую горизонтальную панель
         Box box2 = Box.createHorizontalBox();
         JLabel firstNameLabel = new JLabel("First Name:");
         firstNameField = new JTextField(15);
@@ -49,7 +53,7 @@ public class RegistretionFrame extends JFrame {
         box2.add(Box.createHorizontalStrut(6));
         box2.add(firstNameField);
 
-        // Настраиваем первую горизонтальную панель (для ввода логина)
+        // Настраиваем третью горизонтальную панель (для ввода логина)
         Box box3 = Box.createHorizontalBox();
         JLabel secondNameLabel = new JLabel("Second Name:");
         secondNameField = new JTextField(15);
@@ -58,7 +62,7 @@ public class RegistretionFrame extends JFrame {
         box3.add(secondNameField);
 
 
-        // Настраиваем вторую горизонтальную панель (для ввода пароля)
+        // Настраиваем четвертую горизонтальную панель (для ввода пароля)
         Box box4 = Box.createHorizontalBox();
         JLabel passwordLabel = new JLabel("Password:");
         passwordField = new JPasswordField(15);
@@ -67,7 +71,7 @@ public class RegistretionFrame extends JFrame {
         box4.add(passwordField);
 
 
-        // Настраиваем третью горизонтальную панель (с кнопками)
+        // Настраиваем пятую горизонтальную панель (с кнопками)
         Box box5 = Box.createHorizontalBox();
         ok = new JButton("OK");
         ok.addActionListener(actionListener);
@@ -79,10 +83,15 @@ public class RegistretionFrame extends JFrame {
         box5.add(cancel);
 
         // Настраиваем третью горизонтальную панель (с кнопками)
-        Box box6 = Box.createHorizontalBox();
+/*        Box box6 = Box.createHorizontalBox();*/
         state = new JLabel("State:");
-        box6.add(Box.createHorizontalStrut(6));
-        box6.add(state);
+        state.setHorizontalAlignment(SwingConstants.LEFT);
+        state.setPreferredSize(new Dimension(100, 16));
+        progressBar = new JProgressBar();
+        progressBar.setPreferredSize(new Dimension(100, 16));
+        progressBar.setIndeterminate(true);
+//        box6.add(Box.createHorizontalStrut(6));
+//        box6.add(state);
 
         // Уточняем размеры компонентов
         loginLabel.setPreferredSize(passwordLabel.getPreferredSize());
@@ -99,7 +108,8 @@ public class RegistretionFrame extends JFrame {
         mainBox.add(Box.createVerticalStrut(12));
         mainBox.add(box5);
         mainBox.add(Box.createVerticalStrut(12));
-        mainBox.add(box6);
+/*        mainBox.add(box6);*/
+
         return mainBox;
     }
 

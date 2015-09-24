@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
-
 import java.util.List;
 
 public class UserDaoImpl implements UserDao, AutoCloseable{

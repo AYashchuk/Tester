@@ -29,6 +29,7 @@ public class LoginFrame extends JFrame {
     private LoginFrame() {
         super("Enter in Tester system");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
         setVisible(true);
         setContentPane(setContent());
         pack();
