@@ -9,9 +9,9 @@ public class User {
     @Id
     @SequenceGenerator(name = "sequence", sequenceName = "USERS_SEQ", allocationSize = 1, initialValue = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence")
+
     @Column(name = "ID")
     Long id;
-
     @Column(name = "FIRSTNAME")
     String firstName;
     @Column(name = "SECONDNAME")
@@ -20,9 +20,19 @@ public class User {
     String login;
     @Column(name = "PASSWORD")
     String password;
+    @Column(name = "ADMIN")
+    Boolean isAdmin;
 
 
     public User() {
+    }
+
+    public User(String firstName, String secondName, String login, String password, boolean isAdmin) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.login = login;
+        this.password = password;
+        this.isAdmin = new Boolean(isAdmin);
     }
 
     public User(String firstName, String secondName, String login, String password) {
@@ -30,6 +40,7 @@ public class User {
         this.secondName = secondName;
         this.login = login;
         this.password = password;
+        this.isAdmin = new Boolean(false);
     }
 
     public void setFirstName(String firstName) {
@@ -48,10 +59,11 @@ public class User {
         this.password = password;
     }
 
-    public String getFirstName() {
-
-        return firstName;
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
+
+    public String getFirstName() { return firstName;}
 
     public String getSecondName() {
         return secondName;
@@ -65,12 +77,16 @@ public class User {
         return id;
     }
 
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
     public String getPassword() {
         return password;
     }
 
     @Override
     public String toString(){
-        return this.firstName + " " + this.secondName + " " + this.login;
+        return this.firstName + " " + this.secondName + " " + this.login + " " + this.isAdmin;
     }
 }
