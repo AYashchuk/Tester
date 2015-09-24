@@ -25,6 +25,7 @@ public class RegistretionFrame extends JFrame {
     private JLabel state;
     private CurrentActionListener actionListener = new CurrentActionListener();
     private JLabel keyWordLabel;
+    private MainFrame mainFrame;
 
     private RegistretionFrame() throws HeadlessException {
         super("Registration in Tester");
@@ -34,6 +35,7 @@ public class RegistretionFrame extends JFrame {
         getContentPane().add(setContent(), BorderLayout.NORTH);
         getContentPane().add(state, BorderLayout.CENTER);
         pack();
+        setLocationRelativeTo(null);
     }
 
     private Box setContent(){
@@ -224,7 +226,12 @@ public class RegistretionFrame extends JFrame {
         User user;
         if(keyword != null) user = new User(firstName,lastName,login,pass,true);
         else  user = new User(firstName,lastName,login,pass);
-        userDao.create(user);
+        if(userDao.create(user)!= null){
+            MainFrame mainFrame =  MainFrame.getInstance();
+            mainFrame.setCurUser(user);
+        }
+        this.setVisible(false);
+
     }
 
     public JPasswordField getPasswordField() {

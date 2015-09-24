@@ -17,6 +17,7 @@ public class LoginFrame extends JFrame {
     private JButton reg;
     private CurrentActionListener actionListener = new CurrentActionListener();
     private static LoginFrame loginFrame;
+    private JFrame mainFrame;
 
     public static LoginFrame getInstance(){
         if(loginFrame == null){
@@ -33,6 +34,7 @@ public class LoginFrame extends JFrame {
         setVisible(true);
         setContentPane(setContent());
         pack();
+        setLocationRelativeTo(null);
         setResizable(false);
     }
 
