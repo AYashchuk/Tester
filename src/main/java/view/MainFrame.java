@@ -28,11 +28,13 @@ public class MainFrame extends JFrame {
     }
 
     public void setCurUser(User curUser) {
+        this.setVisible(true);
         this.curUser = curUser;
         if(curUser.getIsAdmin()) jPanel = new AdminsJPanel(curUser.getLogin());
         else jPanel = new UsersJPanel(curUser.getLogin());
         add(jPanel);
         pack();
+        validate();
         repaint();
     }
 
@@ -47,5 +49,9 @@ public class MainFrame extends JFrame {
     public static MainFrame getInstance() {
         if(mainFrame == null) mainFrame = new MainFrame();
         return mainFrame;
+    }
+
+    public void logout(){
+        getContentPane().removeAll();
     }
 }

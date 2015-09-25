@@ -35,7 +35,6 @@ public class LoginFrame extends JFrame {
         setContentPane(setContent());
         pack();
         setLocationRelativeTo(null);
-        setResizable(false);
     }
 
 
@@ -104,8 +103,14 @@ public class LoginFrame extends JFrame {
             }
             if( ((JButton)e.getSource()) == reg){
                 getInstance().setVisible(false);
+                clearFields();
                 RegistretionFrame.getInstance().setVisible(true);
             }
         }
+    }
+
+    public void clearFields(){
+        passwordField.setText("");
+        loginField.setText("");
     }
 }

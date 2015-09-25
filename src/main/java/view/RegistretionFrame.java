@@ -231,7 +231,16 @@ public class RegistretionFrame extends JFrame {
             mainFrame.setCurUser(user);
         }
         this.setVisible(false);
+        clearFields();
 
+    }
+
+    public void clearFields(){
+        passwordField.setText("");
+        firstNameField.setText("");
+        loginField.setText("");
+        secondNameField.setText("");
+        keyWordField.setText("");
     }
 
     public JPasswordField getPasswordField() {

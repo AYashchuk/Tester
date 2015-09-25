@@ -1,14 +1,18 @@
 package view.components;
 
+import view.LoginFrame;
+import view.MainFrame;
+
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class UsersJPanel extends MainJPanel {
-    String [] ar = {"Select1","Select2"};
-    private JComboBox comboBox = new JComboBox(ar);
+    private JComboBox comboBox = new JComboBox();
     private java.util.List<Checkbox> questions = new ArrayList<>();
 
     private JLabel question = new JLabel("<html><h2>Question .................... ?</h2></html>");
@@ -22,32 +26,34 @@ public class UsersJPanel extends MainJPanel {
     private JButton prev = new JButton("prev");
     private JButton start = new JButton("start test");
     private JButton logout = new JButton("logout");
+    private JButton connect = new JButton("connect on server");
     private JProgressBar progressBar = new JProgressBar();
+
 
     public UsersJPanel(String login) {
         super(login);
         questions.add(checkbox1);
-        questions.add(checkbox1);
-        questions.add(checkbox1);
-        questions.add(checkbox1);
-        questions.add(checkbox1);
-        questions.add(checkbox1);
+        questions.add(checkbox2);
+        questions.add(checkbox3);
+        questions.add(checkbox4);
+        questions.add(checkbox5);
+        questions.add(checkbox6);
 
         setSize(new Dimension(400, 600));
         setLayout(new BorderLayout());
-
-        JPanel jPanelNorth = new JPanel();
-        jPanelNorth.setBorder(new BevelBorder(BevelBorder.LOWERED));
-        jPanelNorth.add(createNorthPanel());
-
-        JPanel jPanelCenter = new JPanel();
-        jPanelCenter.setBorder(new BevelBorder(BevelBorder.LOWERED));
-        jPanelCenter.add(createCenterPanel());
-
-
-        JPanel jPanelSouth = new JPanel();
-        jPanelSouth.setBorder(new BevelBorder(BevelBorder.LOWERED));
-        jPanelSouth.add(createSouthPanel());
+        addListeners();
+//        JPanel jPanelNorth = new JPanel();
+//        jPanelNorth.setBorder(new BevelBorder(BevelBorder.LOWERED));
+//        jPanelNorth.add(createNorthPanel());
+//
+//        JPanel jPanelCenter = new JPanel();
+//        jPanelCenter.setBorder(new BevelBorder(BevelBorder.LOWERED));
+//        jPanelCenter.add(createCenterPanel());
+//
+//
+//        JPanel jPanelSouth = new JPanel();
+//        jPanelSouth.setBorder(new BevelBorder(BevelBorder.LOWERED));
+//        jPanelSouth.add(createSouthPanel());
 
 
 
@@ -83,6 +89,85 @@ public class UsersJPanel extends MainJPanel {
         box.add(horBox);
 
         return box;
+    }
+
+    private void addListeners() {
+        connect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame test = new JFrame("Connect on server");
+                test.setResizable(false);
+                test.setVisible(true);
+                test.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+                JLabel state = new JLabel("State: ");
+                JButton testConnection = new JButton("test");
+                testConnection.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        state.setText("connect");
+                    }
+                });
+                JButton ok = new JButton("Ok");
+                ok.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        test.setVisible(false);
+
+                    }
+                });
+                JButton disconnect = new JButton("Disconncet");
+                disconnect.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+
+                    }
+                });
+
+
+                // Настраиваем первую горизонтальную панель (для ввода логина)
+                Box box = Box.createVerticalBox();
+                Box box2 = Box.createHorizontalBox();
+                Box box1 = Box.createHorizontalBox();
+                JLabel loginLabel = new JLabel("Enter servers ip:");
+                JTextField ip = new JTextField("192.168.1.3    ");
+                box1.add(loginLabel);
+                box1.add(Box.createHorizontalStrut(6));
+                box1.add(ip);
+
+
+                box2.add(ok);
+                box2.add(Box.createHorizontalStrut(6));
+                box2.add(testConnection);
+                box2.add(Box.createHorizontalStrut(6));
+                box2.add(disconnect);
+
+
+                Box mainBox = Box.createVerticalBox();
+                mainBox.setBorder(new EmptyBorder(12,12,12,12));
+                mainBox.add(box1);
+                mainBox.add(Box.createVerticalStrut(10));
+                mainBox.add(Box.createHorizontalGlue());
+                mainBox.add(box2);
+                mainBox.add(Box.createHorizontalGlue());
+                mainBox.add(Box.createVerticalStrut(10));
+                mainBox.add(state);
+
+                test.setContentPane(mainBox);
+                test.setLocationRelativeTo(null);
+                test.pack();
+            }
+        });
+        logout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainFrame.getInstance().setVisible(false);
+                MainFrame.getInstance().logout();
+                LoginFrame.getInstance().setVisible(true);
+            }
+        });
+
+
+
     }
 
     private Box createCenterPanel() {
@@ -132,7 +217,9 @@ public class UsersJPanel extends MainJPanel {
         horBox.add(new JLabel("<html><h2>Select Test:"+"</html></h2>"));
         horBox.add(Box.createHorizontalStrut(5));
         horBox.add(comboBox);
-        horBox.add(Box.createHorizontalStrut(300));
+        horBox.add(Box.createHorizontalStrut(5));
+        horBox.add(connect);
+        horBox.add(Box.createHorizontalStrut(200));
         horBox.add(new JLabel("<html><h2>You enter on login: " + super.login +"</html></h2>"));
         horBox.add(Box.createHorizontalStrut(5));
         horBox.add(logout);
