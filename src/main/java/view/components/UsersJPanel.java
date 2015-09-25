@@ -4,6 +4,7 @@ import view.LoginFrame;
 import view.MainFrame;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,37 +43,42 @@ public class UsersJPanel extends MainJPanel {
         setSize(new Dimension(400, 600));
         setLayout(new BorderLayout());
         addListeners();
-//        JPanel jPanelNorth = new JPanel();
-//        jPanelNorth.setBorder(new BevelBorder(BevelBorder.LOWERED));
-//        jPanelNorth.add(createNorthPanel());
-//
-//        JPanel jPanelCenter = new JPanel();
-//        jPanelCenter.setBorder(new BevelBorder(BevelBorder.LOWERED));
-//        jPanelCenter.add(createCenterPanel());
-//
-//
-//        JPanel jPanelSouth = new JPanel();
-//        jPanelSouth.setBorder(new BevelBorder(BevelBorder.LOWERED));
-//        jPanelSouth.add(createSouthPanel());
+
+        JPanel jPanelNorth = new JPanel();
+        jPanelNorth.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        jPanelNorth.add(createNorthPanel());
+
+        JPanel jPanelCenter = new JPanel();
+        jPanelCenter.setVisible(false);
+        jPanelCenter.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        jPanelCenter.add(createCenterPanel());
+
+
+        JPanel jPanelSouth = new JPanel();
+        jPanelSouth.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        jPanelSouth.add(createSouthPanel());
 
 
 
-        add(createNorthPanel(), BorderLayout.NORTH);
+        add(jPanelNorth, BorderLayout.NORTH);
         add(createWestPanel(), BorderLayout.WEST);
-        add(createCenterPanel(),BorderLayout.CENTER);
+        add(jPanelCenter,BorderLayout.CENTER);
         add(createSouthPanel(),BorderLayout.SOUTH);
 
     }
 
     private JScrollPane createWestPanel() {
-        JScrollPane jScrollPane = new JScrollPane();
-        for(int i=0;i<questions.size();i++){
-            jScrollPane.add(questions.get(i));
-        }
-        return jScrollPane;
+        Box box = Box.createVerticalBox();
+/*        for(int i=0;i<30;i++){
+            box.add(new JButton("Button " + i));
+            box.add(Box.createVerticalStrut(3));
+        }*/
+        return new JScrollPane(box);
     }
 
     private Box createSouthPanel() {
+        prev.setEnabled(false);
+        next.setEnabled(false);
         Box box = Box.createVerticalBox();
         Box horBox = Box.createHorizontalBox();
         horBox.add(Box.createHorizontalStrut(10));
@@ -219,13 +225,13 @@ public class UsersJPanel extends MainJPanel {
         horBox.add(comboBox);
         horBox.add(Box.createHorizontalStrut(5));
         horBox.add(connect);
-        horBox.add(Box.createHorizontalStrut(200));
+        horBox.add(Box.createHorizontalStrut(50));
         horBox.add(new JLabel("<html><h2>You enter on login: " + super.login +"</html></h2>"));
         horBox.add(Box.createHorizontalStrut(5));
         horBox.add(logout);
         box.add(horBox);
         horBox.add(Box.createVerticalStrut(10));
-        box.add(new JLabel("<html> <h1>Test name: Java<h1></html>"));
+        box.add(new JLabel("<html> <h1>Test name:<h1></html>"));
         return box;
     }
 }

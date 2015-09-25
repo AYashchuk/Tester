@@ -15,6 +15,7 @@ public class MainFrame extends JFrame {
     private MainFrame() throws HeadlessException {
         super("Tester");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(750,450);
         setVisible(true);
         setLocationRelativeTo(null);
     }
@@ -33,7 +34,6 @@ public class MainFrame extends JFrame {
         if(curUser.getIsAdmin()) jPanel = new AdminsJPanel(curUser.getLogin());
         else jPanel = new UsersJPanel(curUser.getLogin());
         add(jPanel);
-        pack();
         validate();
         repaint();
     }

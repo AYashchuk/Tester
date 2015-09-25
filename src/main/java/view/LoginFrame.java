@@ -85,7 +85,12 @@ public class LoginFrame extends JFrame {
     }
 
     public static void main(String [] args){
-        getInstance();
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                JFrame.setDefaultLookAndFeelDecorated(true);
+                getInstance();
+            }
+        });
     }
 
 
