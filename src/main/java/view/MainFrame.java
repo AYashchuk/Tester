@@ -1,8 +1,8 @@
 package view;
 
 import domain.User;
-import view.components.AdminsJPanel;
-import view.components.UsersJPanel;
+import view.viewComponents.AdminsJPanel;
+import view.viewComponents.UsersJPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,9 +20,6 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    private Container setContent() {
-        return null;
-    }
 
     public void setjPanel(JPanel jPanel) {
         this.jPanel = jPanel;

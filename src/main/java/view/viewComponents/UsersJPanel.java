@@ -1,5 +1,8 @@
-package view.components;
+package view.viewComponents;
 
+import controller.MainControllerImpl;
+import dao.QuestionDaoImpl;
+import util.NetworkConnection;
 import view.LoginFrame;
 import view.MainFrame;
 
@@ -32,7 +35,7 @@ public class UsersJPanel extends MainJPanel {
 
 
     public UsersJPanel(String login) {
-        super(login);
+        super(login, new MainControllerImpl(new NetworkConnection(),new QuestionDaoImpl()));
         questions.add(checkbox1);
         questions.add(checkbox2);
         questions.add(checkbox3);
@@ -102,6 +105,7 @@ public class UsersJPanel extends MainJPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame test = new JFrame("Connect on server");
+                JButton ok = new JButton("Ok");
                 test.setResizable(false);
                 test.setVisible(true);
                 test.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -110,22 +114,29 @@ public class UsersJPanel extends MainJPanel {
                 testConnection.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        state.setText("connect");
+                        if(mainController.testConnection()){
+                            state.setText("<html><font color = green>Connection accept!"+"</font>");
+                            ok.setEnabled(true);
+                        }else{
+                            state.setText("<html><font color = red>"+"Can`t connect on server...</font>");
+                        }
+
                     }
                 });
-                JButton ok = new JButton("Ok");
+
+                ok.setEnabled(false);
                 ok.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         test.setVisible(false);
-
                     }
                 });
-                JButton disconnect = new JButton("Disconncet");
+                JButton disconnect = new JButton("Disconnect");
                 disconnect.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
+                        if(mainController.disconnectFromServer()) state.setText("<html><font color = green>"+"Disconnect...</font>");
+                        else state.setText("<html><font color = red>"+"Connection error, try again...</font>");
                     }
                 });
 
@@ -135,7 +146,7 @@ public class UsersJPanel extends MainJPanel {
                 Box box2 = Box.createHorizontalBox();
                 Box box1 = Box.createHorizontalBox();
                 JLabel loginLabel = new JLabel("Enter servers ip:");
-                JTextField ip = new JTextField("192.168.1.3    ");
+                JTextField ip = new JTextField("192.168.1.3");
                 box1.add(loginLabel);
                 box1.add(Box.createHorizontalStrut(6));
                 box1.add(ip);
@@ -154,9 +165,12 @@ public class UsersJPanel extends MainJPanel {
                 mainBox.add(Box.createVerticalStrut(10));
                 mainBox.add(Box.createHorizontalGlue());
                 mainBox.add(box2);
-                mainBox.add(Box.createHorizontalGlue());
+
+                Box box3 = Box.createHorizontalBox();
+                box3.add(state);
+                box3.add(Box.createHorizontalGlue());
                 mainBox.add(Box.createVerticalStrut(10));
-                mainBox.add(state);
+                mainBox.add(box3);
 
                 test.setContentPane(mainBox);
                 test.setLocationRelativeTo(null);

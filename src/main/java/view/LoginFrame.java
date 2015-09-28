@@ -1,7 +1,7 @@
 package view;
 
-import dao.UserDao;
-import dao.UserDaoImpl;
+import controller.LoginController;
+import controller.LoginControllerImpl;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame {
-    private UserDao userDao = new UserDaoImpl();
     private JButton exit;
     private JButton ok;
     private JPasswordField passwordField;
@@ -17,17 +16,17 @@ public class LoginFrame extends JFrame {
     private JButton reg;
     private CurrentActionListener actionListener = new CurrentActionListener();
     private static LoginFrame loginFrame;
-    private JFrame mainFrame;
+    private LoginController loginController;
 
     public static LoginFrame getInstance(){
         if(loginFrame == null){
-            loginFrame = new LoginFrame();
+            loginFrame = new LoginFrame(new LoginControllerImpl());
             return loginFrame;
         }else
         return loginFrame;
     }
 
-    private LoginFrame() {
+    private LoginFrame(LoginController loginController) {
         super("Enter in Tester system");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -35,6 +34,7 @@ public class LoginFrame extends JFrame {
         setContentPane(setContent());
         pack();
         setLocationRelativeTo(null);
+        this.loginController = loginController;
     }
 
 
@@ -87,7 +87,7 @@ public class LoginFrame extends JFrame {
     public static void main(String [] args){
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                JFrame.setDefaultLookAndFeelDecorated(true);
+                //JFrame.setDefaultLookAndFeelDecorated(true);
                 getInstance();
             }
         });
@@ -100,16 +100,13 @@ public class LoginFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (((JButton) e.getSource()) == ok) {
-                System.out.println("ok");
-
+                loginController.registration();
             }
             if (((JButton) e.getSource()) == exit) {
-                System.exit(0);
+                loginController.exit();
             }
             if( ((JButton)e.getSource()) == reg){
-                getInstance().setVisible(false);
-                clearFields();
-                RegistretionFrame.getInstance().setVisible(true);
+                loginController.registration();
             }
         }
     }

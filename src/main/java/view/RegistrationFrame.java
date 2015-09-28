@@ -1,19 +1,19 @@
 package view;
 
 
-import dao.UserDao;
+import controller.RegistrationController;
+import controller.RegistrationControllerImpl;
 import dao.UserDaoImpl;
-import domain.User;
-import exception.IncorectDataUserInputException;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RegistretionFrame extends JFrame {
-    private UserDao userDao = new UserDaoImpl();
-    private static RegistretionFrame registretionFrame;
+public class RegistrationFrame extends JFrame {
+    private RegistrationController registrationController;
+    private static RegistrationFrame registretionFrame;
     private JPasswordField passwordField;
     private JButton ok;
     private JButton cancel;
@@ -27,7 +27,7 @@ public class RegistretionFrame extends JFrame {
     private JLabel keyWordLabel;
     private MainFrame mainFrame;
 
-    private RegistretionFrame() throws HeadlessException {
+    private RegistrationFrame(RegistrationController registrationController) throws HeadlessException {
         super("Registration in Tester");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -36,6 +36,7 @@ public class RegistretionFrame extends JFrame {
         getContentPane().add(state, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(null);
+        this.registrationController = registrationController;
     }
 
     private Box setContent(){
@@ -140,9 +141,9 @@ public class RegistretionFrame extends JFrame {
     }
 
 
-    public static RegistretionFrame getInstance(){
+    public static RegistrationFrame getInstance(){
         if(registretionFrame == null){
-            registretionFrame = new RegistretionFrame();
+            registretionFrame = new RegistrationFrame(new RegistrationControllerImpl(new UserDaoImpl()));
             return registretionFrame;
         }else
             return registretionFrame;
@@ -165,74 +166,20 @@ public class RegistretionFrame extends JFrame {
                 pack();
             }
             if (( e.getSource()) == ok) {
-                String pass = new String (passwordField.getPassword()).trim();
-                String firstName = firstNameField.getText().trim();
-                String lastName = secondNameField.getText().trim();
-                String login = loginField.getText().trim();
-                String keyword = keyWordField.getText().trim();
-                try {
-                    if(isAdmin.isSelected()){
-                        checkCorectData(pass, firstName, lastName, login,keyword);
-                        registion(pass, firstName, lastName, login,keyword);
-                    }else {
-                        checkCorectData(pass, firstName, lastName, login, null);
-                        registion(pass, firstName, lastName, login, null);
-                    }
-
-                } catch (IncorectDataUserInputException e1) {
-                    e1.printStackTrace();
-                }
+                if(isAdmin.isSelected()){
+                    registrationController.checkIin(new String(passwordField.getPassword()), firstNameField.getText(),secondNameField.getText(),loginField.getText(),keyWordField.getText(),true);
+                }else  registrationController.checkIin(new String(passwordField.getPassword()), firstNameField.getText(),secondNameField.getText(),loginField.getText(),keyWordField.getText(),false);
             }
             if (( e.getSource()) == cancel) {
-                getInstance().setVisible(false);
-                LoginFrame.getInstance().setVisible(true);
+               registrationController.cancel();
             }
         }
     }
 
-    private void checkCorectData(String pass,String firstName,String lastName,String login,String keyword) throws IncorectDataUserInputException {
-        if(pass.toCharArray().length == 0){
-            state.setText("field password is empty");
-            throw new IncorectDataUserInputException("field password is empty");
-        }
-        if(firstName.toCharArray().length == 0){
-            state.setText("field first name is empty");
-            throw new IncorectDataUserInputException("field first name is empty");
-        }
-        if(lastName.toCharArray().length == 0){
-            state.setText("field last name is empty");
-            throw new IncorectDataUserInputException("field surname is empty");
-        }
-        if(login.toCharArray().length == 0){
-            state.setText("field login is empty");
-            throw new IncorectDataUserInputException("field login is empty");
-        }
-        if(pass.toCharArray().length <=4){
-            state.setText("password is short");
-            throw new IncorectDataUserInputException("password is short");
-        }if(login.toCharArray().length <=4){
-            state.setText("login is short");
-            throw new IncorectDataUserInputException("login is short");
-        }if(keyword != null){
-            if(!keyword.equals("admin")){
-                state.setText("keyword incorrect");
-                throw new IncorectDataUserInputException("keyword incorrect");
-            }
-        }
 
-    }
 
-    public void registion(String pass,String firstName,String lastName,String login, String keyword){
-        User user;
-        if(keyword != null) user = new User(firstName,lastName,login,pass,true);
-        else  user = new User(firstName,lastName,login,pass);
-        if(userDao.create(user)!= null){
-            MainFrame mainFrame =  MainFrame.getInstance();
-            mainFrame.setCurUser(user);
-        }
-        this.setVisible(false);
-        clearFields();
-
+    public void setState(String state){
+        this.state.setText(state);
     }
 
     public void clearFields(){
@@ -243,19 +190,23 @@ public class RegistretionFrame extends JFrame {
         keyWordField.setText("");
     }
 
-    public JPasswordField getPasswordField() {
-        return passwordField;
+    public char[] getPassword() {
+        return passwordField.getPassword();
     }
 
-    public JTextField getFirstNameField() {
-        return firstNameField;
+    public String getFirstName() {
+        return firstNameField.getText();
     }
 
-    public JTextField getLoginField() {
-        return loginField;
+    public String getLogin() {
+        return loginField.getText();
     }
 
-    public JTextField getSecondNameField() {
-        return secondNameField;
+    public String getSecondName() {
+        return secondNameField.getText();
+    }
+
+    public String getKeyWordField() {
+        return keyWordField.getText();
     }
 }
