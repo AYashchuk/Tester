@@ -2,6 +2,10 @@ package view;
 
 import controller.LoginController;
 import controller.LoginControllerImpl;
+import dao.UserDaoImpl;
+import exception.IncorrectDataUserInputException;
+import exception.IncorrectPasswordException;
+import exception.NoContainsUserException;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -17,10 +21,12 @@ public class LoginFrame extends JFrame {
     private CurrentActionListener actionListener = new CurrentActionListener();
     private static LoginFrame loginFrame;
     private LoginController loginController;
+    private JLabel loginLabel;
+    JLabel passwordLabel;
 
     public static LoginFrame getInstance(){
         if(loginFrame == null){
-            loginFrame = new LoginFrame(new LoginControllerImpl());
+            loginFrame = new LoginFrame(new LoginControllerImpl(new UserDaoImpl()));
             return loginFrame;
         }else
         return loginFrame;
@@ -41,7 +47,7 @@ public class LoginFrame extends JFrame {
     private Box setContent(){
         // Настраиваем первую горизонтальную панель (для ввода логина)
         Box box1 = Box.createHorizontalBox();
-        JLabel loginLabel = new JLabel("Login:");
+        loginLabel = new JLabel("Login:");
         loginField = new JTextField(15);
         box1.add(loginLabel);
         box1.add(Box.createHorizontalStrut(6));
@@ -50,7 +56,7 @@ public class LoginFrame extends JFrame {
 
         // Настраиваем вторую горизонтальную панель (для ввода пароля)
         Box box2 = Box.createHorizontalBox();
-        JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel = new JLabel("Password:");
         passwordField = new JPasswordField(15);
         box2.add(passwordLabel);
         box2.add(Box.createHorizontalStrut(6));
@@ -100,7 +106,15 @@ public class LoginFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (((JButton) e.getSource()) == ok) {
-                loginController.registration();
+                try {
+                    loginController.login(loginField.getText(),new String(passwordField.getPassword()));
+                } catch (NoContainsUserException e1) {
+                    e1.printStackTrace();
+                } catch (IncorrectPasswordException e1) {
+                    e1.printStackTrace();
+                } catch (IncorrectDataUserInputException e1) {
+                    e1.printStackTrace();
+                }
             }
             if (((JButton) e.getSource()) == exit) {
                 loginController.exit();
@@ -114,5 +128,14 @@ public class LoginFrame extends JFrame {
     public void clearFields(){
         passwordField.setText("");
         loginField.setText("");
+        loginLabel.setText("Login:");
+        passwordLabel.setText("Password:");
+    }
+
+    public void setRedTextLogin(){
+        loginLabel.setText("<html><font color = red>"+"Login:"+"</font>");
+    }
+    public void setRedTextPassword(){
+        loginLabel.setText("<html><font color = red>"+"Password:"+"</font>");
     }
 }

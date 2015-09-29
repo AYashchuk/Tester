@@ -1,6 +1,6 @@
 package view.viewComponents;
 
-import controller.MainControllerImpl;
+import controller.MainUserControllerImpl;
 import dao.QuestionDaoImpl;
 import util.NetworkConnection;
 import view.LoginFrame;
@@ -35,7 +35,7 @@ public class UsersJPanel extends MainJPanel {
 
 
     public UsersJPanel(String login) {
-        super(login, new MainControllerImpl(new NetworkConnection(),new QuestionDaoImpl()));
+        super(login, new MainUserControllerImpl(new NetworkConnection(),new QuestionDaoImpl()));
         questions.add(checkbox1);
         questions.add(checkbox2);
         questions.add(checkbox3);
@@ -52,7 +52,7 @@ public class UsersJPanel extends MainJPanel {
         jPanelNorth.add(createNorthPanel());
 
         JPanel jPanelCenter = new JPanel();
-        jPanelCenter.setVisible(false);
+        //jPanelCenter.setVisible(false);
         jPanelCenter.setBorder(new BevelBorder(BevelBorder.LOWERED));
         jPanelCenter.add(createCenterPanel());
 
@@ -114,7 +114,7 @@ public class UsersJPanel extends MainJPanel {
                 testConnection.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(mainController.testConnection()){
+                        if(mainUserController.testConnection()){
                             state.setText("<html><font color = green>Connection accept!"+"</font>");
                             ok.setEnabled(true);
                         }else{
@@ -135,7 +135,7 @@ public class UsersJPanel extends MainJPanel {
                 disconnect.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(mainController.disconnectFromServer()) state.setText("<html><font color = green>"+"Disconnect...</font>");
+                        if(mainUserController.disconnectFromServer()) state.setText("<html><font color = green>"+"Disconnect...</font>");
                         else state.setText("<html><font color = red>"+"Connection error, try again...</font>");
                     }
                 });

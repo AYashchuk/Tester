@@ -19,10 +19,10 @@ public class RegistrationControllerImpl implements RegistrationController {
         try {
             if(isAdmin){
                 checkCorrectData(password, firstName, lastName, login, keyword);
-                registion(password, firstName, lastName, login,keyword);
+                registration(password, firstName, lastName, login,keyword);
             }else {
                 checkCorrectData(password, firstName, lastName, login, null);
-                registion(password, firstName, lastName, login, null);
+                registration(password, firstName, lastName, login, null);
             }
 
         } catch (IncorrectDataUserInputException e1) {
@@ -71,7 +71,7 @@ public class RegistrationControllerImpl implements RegistrationController {
 
     }
 
-    public void registion(String pass,String firstName,String lastName,String login, String keyword){
+    public void registration(String pass,String firstName,String lastName,String login, String keyword){
         User user;
         if(keyword != null) user = new User(firstName,lastName,login,pass,true);
         else  user = new User(firstName,lastName,login,pass);

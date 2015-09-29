@@ -1,18 +1,18 @@
 package view.viewComponents;
 
-import controller.MainController;
+import controller.MainUserController;
 
 import javax.swing.*;
 
 public abstract class MainJPanel extends JPanel{
     protected JLabel jlogin;
-    protected MainController mainController;
+    protected MainUserController mainUserController;
     protected String login;
-    protected MainJPanel(String login,MainController mainController) {
+    protected MainJPanel(String login, MainUserController mainUserController) {
         super();
         this.login = login;
         jlogin = new JLabel(login);
-        this.mainController = mainController;
+        this.mainUserController = mainUserController;
     }
 
     public void setLogin(String login) {

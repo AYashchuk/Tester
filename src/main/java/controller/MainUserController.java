@@ -1,6 +1,6 @@
 package controller;
 
-public interface MainController {
+public interface MainUserController {
     boolean connectOnServer();
     boolean testConnection();
     boolean disconnectFromServer();

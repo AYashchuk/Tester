@@ -3,11 +3,11 @@ package controller;
 import dao.QuestionDao;
 import util.Networking;
 
-public class MainControllerImpl implements MainController {
+public class MainUserControllerImpl implements MainUserController {
     private Networking networkConnection;
     private QuestionDao questionDao;
 
-    public MainControllerImpl(Networking networkConnection, QuestionDao questionDao) {
+    public MainUserControllerImpl(Networking networkConnection, QuestionDao questionDao) {
         this.networkConnection = networkConnection;
         this.questionDao = questionDao;
     }

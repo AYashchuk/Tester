@@ -6,7 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserDaoImpl implements UserDao, AutoCloseable{
     private static Logger log = Logger.getLogger(UserDaoImpl.class);
@@ -68,8 +70,13 @@ public class UserDaoImpl implements UserDao, AutoCloseable{
     }
 
     @Override
-    public List<User> findAll() {
-        return session.createCriteria(User.class).list();
+    public Map<String, User> findAll() {
+        List<User> users = session.createCriteria(User.class).list();
+        Map<String,User> usersMap = new HashMap<String,User>();
+        for(int i=0;i<users.size();i++){
+            usersMap.put(users.get(i).getLogin(),users.get(i));
+        }
+        return usersMap;
     }
 
 
