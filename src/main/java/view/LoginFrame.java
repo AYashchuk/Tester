@@ -136,6 +136,14 @@ public class LoginFrame extends JFrame {
         loginLabel.setText("<html><font color = red>"+"Login:"+"</font>");
     }
     public void setRedTextPassword(){
-        loginLabel.setText("<html><font color = red>"+"Password:"+"</font>");
+        passwordLabel.setText("<html><font color = red>"+"Password:"+"</font>");
+    }
+
+    public JLabel getLoginLabel() {
+        return loginLabel;
+    }
+
+    public JLabel getPasswordLabel() {
+        return passwordLabel;
     }
 }

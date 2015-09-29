@@ -21,12 +21,15 @@ public class LoginControllerImpl implements LoginController {
 
     @Override
     public boolean login(String login, String password) throws NoContainsUserException, IncorrectPasswordException, IncorrectDataUserInputException {
+        LoginFrame.getInstance().getLoginLabel().setText("Login:");
+        LoginFrame.getInstance().getPasswordLabel().setText("Password:");
         if(checkInputData(login, password)){
             Map<String,User> users = userDao.findAll();
             if(users.containsKey(login)){
                 if(password.equals(users.get(login).getPassword())){
                     mainFrame =  MainFrame.getInstance();
                     mainFrame.setCurUser(users.get(login));
+                    LoginFrame.getInstance().clearFields();
                     return true;
                 }else{
                     LoginFrame.getInstance().setRedTextPassword();
