@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class UsersJPanel extends MainJPanel {
     private JComboBox comboBox = new JComboBox();
-    private java.util.List<Checkbox> questions = new ArrayList<>();
+    private java.util.List<Checkbox> questions;
 
     private JLabel question = new JLabel("<html><h2>Question .................... ?</h2></html>");
     private Checkbox checkbox1 = new Checkbox("answer 1");
@@ -36,6 +36,7 @@ public class UsersJPanel extends MainJPanel {
 
     public UsersJPanel(String login) {
         super(login, new MainUserControllerImpl(new NetworkConnection(),new QuestionDaoImpl()));
+        questions = new ArrayList<Checkbox>();
         questions.add(checkbox1);
         questions.add(checkbox2);
         questions.add(checkbox3);
@@ -104,12 +105,12 @@ public class UsersJPanel extends MainJPanel {
         connect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame test = new JFrame("Connect on server");
-                JButton ok = new JButton("Ok");
+                final JFrame test = new JFrame("Connect on server");
+                final JButton ok = new JButton("Ok");
                 test.setResizable(false);
                 test.setVisible(true);
                 test.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-                JLabel state = new JLabel("State: ");
+                final JLabel state = new JLabel("State: ");
                 JButton testConnection = new JButton("test");
                 testConnection.addActionListener(new ActionListener() {
                     @Override
