@@ -1,7 +1,11 @@
 package view;
 
+import controller.mainAdminController.MainAdminControllerImpl;
+import controller.mainUserController.MainUserWhithNetworkControllerImpl;
+import dao.QuestionDaoImpl;
 import domain.User;
-import view.viewComponents.AdminsJPanel;
+import util.NetworkConnection;
+import view.viewComponents.AdminJPanel;
 import view.viewComponents.UsersJPanel;
 
 import javax.swing.*;
@@ -28,8 +32,8 @@ public class MainFrame extends JFrame {
     public void setCurUser(User curUser) {
         this.setVisible(true);
         this.curUser = curUser;
-        if(curUser.getIsAdmin()) jPanel = new AdminsJPanel(curUser.getLogin());
-        else jPanel = new UsersJPanel(curUser.getLogin());
+        if(curUser.getIsAdmin()) jPanel = new AdminJPanel(curUser.getLogin(), new MainAdminControllerImpl());
+        else jPanel = new UsersJPanel(curUser.getLogin(),new MainUserWhithNetworkControllerImpl(new NetworkConnection(),new QuestionDaoImpl()),false);
         add(jPanel);
         validate();
         repaint();

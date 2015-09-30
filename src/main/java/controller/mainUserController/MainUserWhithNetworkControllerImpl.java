@@ -1,13 +1,13 @@
-package controller;
+package controller.mainUserController;
 
 import dao.QuestionDao;
 import util.Networking;
 
-public class MainUserControllerImpl implements MainUserController {
+public class MainUserWhithNetworkControllerImpl implements MainUserController {
     private Networking networkConnection;
     private QuestionDao questionDao;
 
-    public MainUserControllerImpl(Networking networkConnection, QuestionDao questionDao) {
+    public MainUserWhithNetworkControllerImpl(Networking networkConnection, QuestionDao questionDao) {
         this.networkConnection = networkConnection;
         this.questionDao = questionDao;
     }

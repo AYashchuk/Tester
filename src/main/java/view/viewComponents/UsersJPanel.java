@@ -1,8 +1,6 @@
 package view.viewComponents;
 
-import controller.MainUserControllerImpl;
-import dao.QuestionDaoImpl;
-import util.NetworkConnection;
+import controller.mainUserController.MainUserController;
 import view.LoginFrame;
 import view.MainFrame;
 
@@ -16,26 +14,15 @@ import java.util.ArrayList;
 
 
 public class UsersJPanel extends MainJPanel {
-    private JComboBox comboBox = new JComboBox();
-    private java.util.List<Checkbox> questions;
+    protected MainUserController mainUserController;
+    private boolean isAdminCreated = false;
 
-    private JLabel question = new JLabel("<html><h2>Question .................... ?</h2></html>");
-    private Checkbox checkbox1 = new Checkbox("answer 1");
-    private Checkbox checkbox2 = new Checkbox("answer 2");
-    private Checkbox checkbox3 = new Checkbox("answer 3");
-    private Checkbox checkbox4 = new Checkbox("answer 4");
-    private Checkbox checkbox5 = new Checkbox("answer 5");
-    private Checkbox checkbox6 = new Checkbox("answer 6");
-    private JButton next = new JButton("next");
-    private JButton prev = new JButton("prev");
-    private JButton start = new JButton("start test");
-    private JButton logout = new JButton("logout");
-    private JButton connect = new JButton("connect on server");
-    private JProgressBar progressBar = new JProgressBar();
+    public UsersJPanel(String login,  MainUserController mainUserController,Boolean isAdminCreated) {
+        super(login);
+        this.isAdminCreated = isAdminCreated;
 
+        this.mainUserController = mainUserController;
 
-    public UsersJPanel(String login) {
-        super(login, new MainUserControllerImpl(new NetworkConnection(),new QuestionDaoImpl()));
         questions = new ArrayList<Checkbox>();
         questions.add(checkbox1);
         questions.add(checkbox2);
@@ -71,16 +58,19 @@ public class UsersJPanel extends MainJPanel {
 
     }
 
-    private JScrollPane createWestPanel() {
+    @Override
+    protected JScrollPane createWestPanel() {
+        JScrollPane jScrollPane = new JScrollPane();
         Box box = Box.createVerticalBox();
-/*        for(int i=0;i<30;i++){
-            box.add(new JButton("Button " + i));
-            box.add(Box.createVerticalStrut(3));
-        }*/
-        return new JScrollPane(box);
+        for(int i=0;i<30;i++){
+            jScrollPane.add(new JButton("Button " + i));
+            jScrollPane.add(Box.createVerticalStrut(3));
+        }
+        return jScrollPane;
     }
 
-    private Box createSouthPanel() {
+    @Override
+    protected Box createSouthPanel() {
         prev.setEnabled(false);
         next.setEnabled(false);
         Box box = Box.createVerticalBox();
@@ -101,7 +91,8 @@ public class UsersJPanel extends MainJPanel {
         return box;
     }
 
-    private void addListeners() {
+    @Override
+    protected void addListeners() {
         connect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -191,7 +182,35 @@ public class UsersJPanel extends MainJPanel {
 
     }
 
-    private Box createCenterPanel() {
+
+
+    @Override
+    protected Box createNorthPanel(){
+        Box box = Box.createVerticalBox();
+        Box horBox = Box.createHorizontalBox();
+        JPanel jpanel = new JPanel();
+        horBox.add(Box.createHorizontalStrut(10));
+        horBox.add(new JLabel("<html><h2>Select Test:"+"</html></h2>"));
+        horBox.add(Box.createHorizontalStrut(5));
+        horBox.add(comboBox);
+        if(isAdminCreated == false){
+            horBox.add(Box.createHorizontalStrut(5));
+            horBox.add(connect);
+            horBox.add(Box.createHorizontalStrut(50));
+            horBox.add(new JLabel("<html><h2>You enter on login: " + super.login +"</html></h2>"));
+            horBox.add(Box.createHorizontalStrut(5));
+            horBox.add(logout);
+        }
+
+
+        box.add(horBox);
+        horBox.add(Box.createVerticalStrut(10));
+        box.add(new JLabel("<html> <h1>Test name:<h1></html>"));
+        return box;
+    }
+
+    @Override
+    protected Box createCenterPanel() {
         Box box = Box.createVerticalBox();
         box.add(Box.createVerticalStrut(10));
         box.add(question);
@@ -227,26 +246,6 @@ public class UsersJPanel extends MainJPanel {
         box.add(horBox3);
         box.add(Box.createVerticalStrut(10));
         box.add(horBox4);
-        return box;
-    }
-
-    private Box createNorthPanel(){
-        Box box = Box.createVerticalBox();
-        Box horBox = Box.createHorizontalBox();
-        JPanel jpanel = new JPanel();
-        horBox.add(Box.createHorizontalStrut(10));
-        horBox.add(new JLabel("<html><h2>Select Test:"+"</html></h2>"));
-        horBox.add(Box.createHorizontalStrut(5));
-        horBox.add(comboBox);
-        horBox.add(Box.createHorizontalStrut(5));
-        horBox.add(connect);
-        horBox.add(Box.createHorizontalStrut(50));
-        horBox.add(new JLabel("<html><h2>You enter on login: " + super.login +"</html></h2>"));
-        horBox.add(Box.createHorizontalStrut(5));
-        horBox.add(logout);
-        box.add(horBox);
-        horBox.add(Box.createVerticalStrut(10));
-        box.add(new JLabel("<html> <h1>Test name:<h1></html>"));
         return box;
     }
 }

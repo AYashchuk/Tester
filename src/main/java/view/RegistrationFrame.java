@@ -1,8 +1,8 @@
 package view;
 
 
-import controller.RegistrationController;
-import controller.RegistrationControllerImpl;
+import controller.registrationController.RegistrationController;
+import controller.registrationController.RegistrationControllerImpl;
 import dao.UserDaoImpl;
 
 import javax.swing.*;

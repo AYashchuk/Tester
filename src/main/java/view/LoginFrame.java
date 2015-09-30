@@ -1,7 +1,7 @@
 package view;
 
-import controller.LoginController;
-import controller.LoginControllerImpl;
+import controller.loginController.LoginController;
+import controller.loginController.LoginControllerImpl;
 import dao.UserDaoImpl;
 import exception.IncorrectDataUserInputException;
 import exception.IncorrectPasswordException;

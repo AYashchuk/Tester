@@ -1,4 +1,4 @@
-package controller;
+package controller.registrationController;
 
 import dao.UserDao;
 import domain.User;

@@ -1,4 +1,4 @@
-package controller;
+package controller.loginController;
 
 import exception.IncorrectDataUserInputException;
 import exception.IncorrectPasswordException;

@@ -1,4 +1,4 @@
-package controller;
+package controller.loginController;
 
 import dao.UserDao;
 import domain.User;
@@ -30,6 +30,7 @@ public class LoginControllerImpl implements LoginController {
                     mainFrame =  MainFrame.getInstance();
                     mainFrame.setCurUser(users.get(login));
                     LoginFrame.getInstance().clearFields();
+                    LoginFrame.getInstance().setVisible(false);
                     return true;
                 }else{
                     LoginFrame.getInstance().setRedTextPassword();
