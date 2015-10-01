@@ -6,16 +6,35 @@ import controller.mainUserController.MainUserWithoutNetworkController;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AdminJPanel extends MainJPanel {
     private MainAdminController mainAdminController;
     private JTabbedPane tabbedPane;
+    private JLabel ip = new JLabel("Servers IP:192.168.1.2");
+    private JButton startStop = new JButton("Start server");
+    private JLabel state = new JLabel("State: ");
+    private JButton addQ = new JButton("add Question");
+    private JButton deleteQ = new JButton("delete Question");
+    private JButton editQ = new JButton("edit Question");
+    private  JButton save = new JButton("Save");
+
+
 
 
     public AdminJPanel(String login, MainAdminController mainAdminController) {
         super(login);
         setSize(800,600);
         this.mainAdminController = mainAdminController;
+
+
+
+        add(createNorthPanel(), BorderLayout.NORTH);
+        add(createWestPanel(), BorderLayout.WEST);
+        add(createCenterPanel(),BorderLayout.CENTER);
+        add(createSouthPanel(),BorderLayout.SOUTH);
+        addListeners();
     }
 
 
@@ -25,9 +44,9 @@ public class AdminJPanel extends MainJPanel {
         Box mainBox = Box.createVerticalBox();
         mainBox.setBorder(new EmptyBorder(12,12,12,12));
 
-        mainBox.add(new JLabel("Servers IP:192.168.1.2"));
-        mainBox.add(new JButton("Start Server"));
-        mainBox.add(new JLabel("State: "));
+        mainBox.add(ip);
+        mainBox.add(startStop);
+        mainBox.add(state);
 
         add(createEastJPanel(), BorderLayout.EAST);
         return mainBox;
@@ -39,10 +58,10 @@ public class AdminJPanel extends MainJPanel {
 
 
         JComponent jPanel = new JPanel(new GridLayout(4,1));
-        jPanel.add(new JButton("add Question"));
-        jPanel.add(new JButton("delete Question"));
-        jPanel.add(new JButton("edit Question"));
-        jPanel.add(new JButton("Save"));
+        jPanel.add(addQ);
+        jPanel.add(deleteQ);
+        jPanel.add(editQ);
+        jPanel.add(save);
         mainjPanel.add(jPanel,BorderLayout.NORTH);
 
 
@@ -78,7 +97,36 @@ public class AdminJPanel extends MainJPanel {
 
     @Override
     protected void addListeners() {
+        startStop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainAdminController.startServer();
+            }
+        });
+        addQ.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+        deleteQ.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        editQ.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
 

@@ -21,11 +21,10 @@ public abstract class MainJPanel extends JPanel{
     protected JButton logout = new JButton("logout");
     protected JButton connect = new JButton("connect on server");
     protected JProgressBar progressBar = new JProgressBar();
-
-
-
     protected JLabel jlogin;
     protected String login;
+
+
     protected MainJPanel(String login) {
         super();
         this.login = login;
@@ -39,9 +38,7 @@ public abstract class MainJPanel extends JPanel{
         questions.add(checkbox5);
         questions.add(checkbox6);
 
-        setSize(new Dimension(400, 600));
         setLayout(new BorderLayout());
-        addListeners();
 
         JPanel jPanelNorth = new JPanel();
         jPanelNorth.setBorder(new BevelBorder(BevelBorder.LOWERED));
@@ -59,11 +56,6 @@ public abstract class MainJPanel extends JPanel{
 
 
 
-        add(jPanelNorth, BorderLayout.NORTH);
-        JComponent jPanelWest =  createWestPanel();
-        add(createWestPanel(), BorderLayout.WEST);
-        add(jPanelCenter,BorderLayout.CENTER);
-        add(createSouthPanel(),BorderLayout.SOUTH);
 
     }
 
