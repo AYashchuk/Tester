@@ -60,13 +60,16 @@ public abstract class MainJPanel extends JPanel{
 
 
         add(jPanelNorth, BorderLayout.NORTH);
-        JScrollPane jPanelWest =  createWestPanel();
+        JComponent jPanelWest =  createWestPanel();
         add(createWestPanel(), BorderLayout.WEST);
         add(jPanelCenter,BorderLayout.CENTER);
         add(createSouthPanel(),BorderLayout.SOUTH);
+
     }
 
-    protected abstract JScrollPane createWestPanel();
+    protected abstract JComponent createWestPanel();
+
+    protected abstract JComponent createEastJPanel();
 
     protected abstract Box createSouthPanel();
 

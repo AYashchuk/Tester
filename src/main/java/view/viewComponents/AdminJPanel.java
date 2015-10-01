@@ -4,6 +4,7 @@ import controller.mainAdminController.MainAdminController;
 import controller.mainUserController.MainUserWithoutNetworkController;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class AdminJPanel extends MainJPanel {
@@ -20,8 +21,32 @@ public class AdminJPanel extends MainJPanel {
 
 
     @Override
-    protected JScrollPane createWestPanel() {
-        return new JScrollPane();
+    protected JComponent createWestPanel() {
+        Box mainBox = Box.createVerticalBox();
+        mainBox.setBorder(new EmptyBorder(12,12,12,12));
+
+        mainBox.add(new JLabel("Servers IP:192.168.1.2"));
+        mainBox.add(new JButton("Start Server"));
+        mainBox.add(new JLabel("State: "));
+
+        add(createEastJPanel(), BorderLayout.EAST);
+        return mainBox;
+    }
+
+    @Override
+    protected JComponent createEastJPanel() {
+        JPanel mainjPanel = new JPanel(new BorderLayout());
+
+
+        JComponent jPanel = new JPanel(new GridLayout(4,1));
+        jPanel.add(new JButton("add Question"));
+        jPanel.add(new JButton("delete Question"));
+        jPanel.add(new JButton("edit Question"));
+        jPanel.add(new JButton("Save"));
+        mainjPanel.add(jPanel,BorderLayout.NORTH);
+
+
+        return mainjPanel;
     }
 
     @Override
@@ -46,15 +71,8 @@ public class AdminJPanel extends MainJPanel {
 
     @Override
     protected Box createCenterPanel() {
-        tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
-        tabbedPane.setSize(800,600);
-        tabbedPane.add("Server", createServerJPanel());
-        tabbedPane.add("Tester user",new UsersJPanel(login,new MainUserWithoutNetworkController(),true));
-        tabbedPane.add("Tester admins",new JButton("df"));
-
-        add(tabbedPane);
-        Box box = Box.createVerticalBox();
-        box.add(tabbedPane);
+        Box box =Box.createVerticalBox();
+        box.add(new UsersJPanel(login,new MainUserWithoutNetworkController(),true));
         return box;
     }
 
@@ -63,11 +81,6 @@ public class AdminJPanel extends MainJPanel {
 
     }
 
-    private Component createServerJPanel() {
-        Box box = Box.createVerticalBox();
-
-        return new JButton("d");
-    }
 
     public void setMainAdminController(MainAdminController mainAdminController) {
         this.mainAdminController = mainAdminController;

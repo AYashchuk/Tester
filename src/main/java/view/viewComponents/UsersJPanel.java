@@ -52,21 +52,33 @@ public class UsersJPanel extends MainJPanel {
 
 
         add(jPanelNorth, BorderLayout.NORTH);
-        add(createWestPanel(), BorderLayout.WEST);
+        if(isAdminCreated == false){
+            add(createWestPanel(), BorderLayout.WEST);
+        }
         add(jPanelCenter,BorderLayout.CENTER);
         add(createSouthPanel(),BorderLayout.SOUTH);
+
 
     }
 
     @Override
     protected JScrollPane createWestPanel() {
-        JScrollPane jScrollPane = new JScrollPane();
-        Box box = Box.createVerticalBox();
-        for(int i=0;i<30;i++){
-            jScrollPane.add(new JButton("Button " + i));
-            jScrollPane.add(Box.createVerticalStrut(3));
-        }
-        return jScrollPane;
+
+        if(isAdminCreated == false){
+            JScrollPane jScrollPane = new JScrollPane();
+            Box box = Box.createVerticalBox();
+            for(int i=0;i<30;i++){
+                jScrollPane.add(new JButton("Button " + i));
+                jScrollPane.add(Box.createVerticalStrut(3));
+
+            }
+            return jScrollPane;
+        }else return null;
+    }
+
+    @Override
+    protected JComponent createEastJPanel() {
+        return null;
     }
 
     @Override
