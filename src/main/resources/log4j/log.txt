@@ -1,0 +1,25 @@
+2015-10-03 01:33:49,260 [AWT-EventQueue-0] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2015-10-03 01:33:49,268 [AWT-EventQueue-0] INFO  org.hibernate.Version - HHH000412: Hibernate Core {4.3.6.Final}
+2015-10-03 01:33:49,270 [AWT-EventQueue-0] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2015-10-03 01:33:49,271 [AWT-EventQueue-0] INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+2015-10-03 01:33:49,300 [AWT-EventQueue-0] INFO  org.hibernate.cfg.Configuration - HHH000043: Configuring from resource: dataBaseConnection/hibernate.cfg.xml
+2015-10-03 01:33:49,301 [AWT-EventQueue-0] INFO  org.hibernate.cfg.Configuration - HHH000040: Configuration resource: dataBaseConnection/hibernate.cfg.xml
+2015-10-03 01:33:49,345 [AWT-EventQueue-0] WARN  org.hibernate.internal.util.xml.DTDEntityResolver - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+2015-10-03 01:33:49,402 [AWT-EventQueue-0] INFO  org.hibernate.cfg.Configuration - HHH000041: Configured SessionFactory: null
+2015-10-03 01:33:49,503 [AWT-EventQueue-0] WARN  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2015-10-03 01:33:49,593 [AWT-EventQueue-0] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000401: using driver [oracle.jdbc.driver.OracleDriver] at URL [jdbc:oracle:thin:@localhost:1521:XE]
+2015-10-03 01:33:49,594 [AWT-EventQueue-0] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000046: Connection properties: {user=TesterUser, password=****}
+2015-10-03 01:33:49,594 [AWT-EventQueue-0] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000006: Autocommit mode: false
+2015-10-03 01:33:49,595 [AWT-EventQueue-0] INFO  org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 1 (min=1)
+2015-10-03 01:33:49,980 [AWT-EventQueue-0] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.Oracle10gDialect
+2015-10-03 01:33:50,134 [AWT-EventQueue-0] INFO  org.hibernate.engine.transaction.internal.TransactionFactoryInitiator - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2015-10-03 01:33:50,138 [AWT-EventQueue-0] INFO  org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2015-10-03 01:33:50,191 [AWT-EventQueue-0] INFO  org.hibernate.validator.util.Version - Hibernate Validator 4.2.0.Final
+2015-10-03 01:33:50,503 [AWT-EventQueue-0] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2015-10-03 01:33:50,503 [AWT-EventQueue-0] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
+2015-10-03 01:33:50,529 [AWT-EventQueue-0] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+2015-10-03 01:33:50,582 [AWT-EventQueue-0] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: TESTERUSER.USERS
+2015-10-03 01:33:50,582 [AWT-EventQueue-0] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [secondname, firstname, password, admin, id, login]
+2015-10-03 01:33:50,582 [AWT-EventQueue-0] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2015-10-03 01:33:50,582 [AWT-EventQueue-0] INFO  org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [sys_c005393]
+2015-10-03 01:33:50,582 [AWT-EventQueue-0] INFO  org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete

@@ -1,8 +1,11 @@
-package util;
+package util.network;
 
 import domain.Massage;
 
-public class NetworkConnection implements Networking{
+public class Client extends Thread implements Networking {
+
+
+
     @Override
     public boolean connectOnServer() {
         return false;
@@ -26,5 +29,13 @@ public class NetworkConnection implements Networking{
     @Override
     public boolean send(Massage massage) {
         return false;
+    }
+
+    @Override
+    public void run(){
+        while(isInterrupted()){
+
+
+        }
     }
 }

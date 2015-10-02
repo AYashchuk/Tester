@@ -1,4 +1,4 @@
-package util;
+package util.network;
 
 import domain.Massage;
 

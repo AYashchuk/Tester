@@ -1,14 +1,18 @@
 package controller.mainAdminController;
 
-public class MainAdminControllerImpl implements MainAdminController{
-    @Override
-    public void startServer() {
+import util.network.ServerNetworking;
 
+public class MainAdminControllerImpl implements MainAdminController{
+    private ServerNetworking networking;
+
+    public MainAdminControllerImpl(ServerNetworking networking) {
+        this.networking = networking;
     }
 
-    @Override
-    public void stopServer() {
 
+    @Override
+    public void startStopServer() {
+        networking.startStopServer();
     }
 
     @Override
@@ -27,7 +31,16 @@ public class MainAdminControllerImpl implements MainAdminController{
     }
 
     @Override
-    public void editQustion() {
+    public void editQuestion() {
 
+    }
+
+
+    public ServerNetworking getNetworking() {
+        return networking;
+    }
+
+    public void setNetworking(ServerNetworking networking) {
+        this.networking = networking;
     }
 }

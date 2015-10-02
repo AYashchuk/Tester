@@ -4,7 +4,8 @@ import controller.mainAdminController.MainAdminControllerImpl;
 import controller.mainUserController.MainUserWhithNetworkControllerImpl;
 import dao.QuestionDaoImpl;
 import domain.User;
-import util.NetworkConnection;
+import util.network.Client;
+import util.network.Server;
 import view.viewComponents.AdminJPanel;
 import view.viewComponents.UsersJPanel;
 
@@ -32,8 +33,8 @@ public class MainFrame extends JFrame {
     public void setCurUser(User curUser) {
         this.setVisible(true);
         this.curUser = curUser;
-        if(curUser.getIsAdmin()) jPanel = new AdminJPanel(curUser.getLogin(), new MainAdminControllerImpl());
-        else jPanel = new UsersJPanel(curUser.getLogin(),new MainUserWhithNetworkControllerImpl(new NetworkConnection(),new QuestionDaoImpl()),false);
+        if(curUser.getIsAdmin()) jPanel = new AdminJPanel(curUser.getLogin(), new MainAdminControllerImpl(new Server()));
+        else jPanel = new UsersJPanel(curUser.getLogin(),new MainUserWhithNetworkControllerImpl(new Client(),new QuestionDaoImpl()),false);
         add(jPanel);
         validate();
         repaint();

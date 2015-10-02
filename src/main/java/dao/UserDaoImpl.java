@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import util.HibernateUtil;
+import util.hibernate.HibernateUtil;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

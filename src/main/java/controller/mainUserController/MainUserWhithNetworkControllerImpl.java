@@ -1,7 +1,7 @@
 package controller.mainUserController;
 
 import dao.QuestionDao;
-import util.Networking;
+import util.network.Networking;
 
 public class MainUserWhithNetworkControllerImpl implements MainUserController {
     private Networking networkConnection;

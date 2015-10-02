@@ -119,7 +119,7 @@ public class AdminJPanel extends MainJPanel {
         startStop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainAdminController.startServer();
+                mainAdminController.startStopServer();
             }
         });
         addQ.addActionListener(new ActionListener() {

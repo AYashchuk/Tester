@@ -1,10 +1,9 @@
 package controller.mainAdminController;
 
 public interface MainAdminController {
-    void startServer();
-    void stopServer();
+    void startStopServer();
     void addQuestion();
     void deleteQuestion();
     void saveChange();
-    void editQustion();
+    void editQuestion();
 }
