@@ -5,6 +5,7 @@ import controller.mainUserController.MainUserWithoutNetworkController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,7 +51,9 @@ public class AdminJPanel extends MainJPanel {
         mainBox.add(ip);
         mainBox.add(startStop);
         mainBox.add(state);
-
+        JPanel serversPanel = new JPanel();
+        serversPanel.setBorder(new TitledBorder("server control"));
+        serversPanel.add(mainBox);
 
 
         JPanel verticalJpanel = new JPanel();
@@ -62,7 +65,7 @@ public class AdminJPanel extends MainJPanel {
         }
         JScrollPane jScrollPane = new JScrollPane(verticalJpanel);
 
-        mainjPanel.add(mainBox,BorderLayout.NORTH);
+        mainjPanel.add(serversPanel,BorderLayout.NORTH);
         mainjPanel.add(jScrollPane,BorderLayout.CENTER);
 
         return mainjPanel;
