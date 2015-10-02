@@ -34,6 +34,7 @@ public class AdminJPanel extends MainJPanel {
         add(createWestPanel(), BorderLayout.WEST);
         add(createCenterPanel(),BorderLayout.CENTER);
         add(createSouthPanel(),BorderLayout.SOUTH);
+        add(createEastJPanel(), BorderLayout.EAST);
         addListeners();
     }
 
@@ -41,15 +42,30 @@ public class AdminJPanel extends MainJPanel {
 
     @Override
     protected JComponent createWestPanel() {
+        JPanel mainjPanel = new JPanel(new BorderLayout());
+
+
         Box mainBox = Box.createVerticalBox();
         mainBox.setBorder(new EmptyBorder(12,12,12,12));
-
         mainBox.add(ip);
         mainBox.add(startStop);
         mainBox.add(state);
 
-        add(createEastJPanel(), BorderLayout.EAST);
-        return mainBox;
+
+
+        JPanel verticalJpanel = new JPanel();
+        verticalJpanel.setLayout(new BoxLayout(verticalJpanel, BoxLayout.Y_AXIS));
+        for(int i =0 ; i< 100; i++){
+            JButton jButton = new JButton("Button " + i);
+            jButton.setAlignmentX(CENTER_ALIGNMENT);
+            verticalJpanel.add(jButton);
+        }
+        JScrollPane jScrollPane = new JScrollPane(verticalJpanel);
+
+        mainjPanel.add(mainBox,BorderLayout.NORTH);
+        mainjPanel.add(jScrollPane,BorderLayout.CENTER);
+
+        return mainjPanel;
     }
 
     @Override
