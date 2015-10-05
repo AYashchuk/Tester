@@ -1,4 +1,7 @@
 package domain;
 
-public class Massage {
+import java.io.Serializable;
+
+public class Massage implements Serializable {
+
 }
