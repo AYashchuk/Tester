@@ -4,9 +4,12 @@ import domain.Massage;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,15 +31,9 @@ public class Server implements ServerNetworking {
 
     }
 
-
     @Override
-    public boolean connectOnServer() {
-        return false;
-    }
+    public void stopServer() {
 
-    @Override
-    public boolean disconnectFromServer() {
-        return false;
     }
 
     @Override
@@ -45,13 +42,19 @@ public class Server implements ServerNetworking {
     }
 
     @Override
-    public Massage receive() {
+    public Massage receiveMassage() {
         return null;
     }
 
     @Override
-    public boolean send(Massage massage) {
+    public boolean sendMassage(Massage massage) {
+
         return false;
+    }
+
+    @Override
+    public String getCurrentIP() {
+        return "Servers IP: " + networksProcess.myLANIP + ":" + networksProcess.getPORT();
     }
 
 
@@ -60,6 +63,9 @@ public class Server implements ServerNetworking {
         private Socket currentClient;
         private final int PORT;
         private List<Socket> clients = new ArrayList<>();
+        private InetAddress addr;
+        private String myLANIP;
+
 
         public NetworksProcess() {
             PORT = 8088;
@@ -93,6 +99,12 @@ public class Server implements ServerNetworking {
 
         private void initServerSocket(){
             try {
+                addr = InetAddress.getLocalHost();
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+            myLANIP = addr.getHostAddress();
+            try {
                 this.serverSocket = new ServerSocket(PORT);
                 //setDaemon(true);
                 start();
@@ -100,16 +112,31 @@ public class Server implements ServerNetworking {
                 e.printStackTrace();
             }
         }
+
+
+        public InetAddress getAddr() {
+            return addr;
+        }
+
+        public String getMyLANIP() {
+            return myLANIP;
+        }
+
+        public int getPORT() {
+            return PORT;
+        }
     }
 
 
     private class ClientProcess extends Thread{
         private Scanner scanner;
-        ObjectOutputStream oos;
+        private ObjectOutputStream oos;
+        private ObjectInputStream ois;
 
         ClientProcess(Socket socket){
             try {
                 oos = new ObjectOutputStream(socket.getOutputStream());
+                ois = new ObjectInputStream(socket.getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -118,6 +145,19 @@ public class Server implements ServerNetworking {
 
         @Override
         public void run(){
+            Scanner scan = new Scanner(ois);
+            while(!isInterrupted()){
+                if(scan.hasNext()){
+                    try {
+                        Massage msg = (Massage)ois.readObject();
+                        System.out.println(msg);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
 
         }
     }

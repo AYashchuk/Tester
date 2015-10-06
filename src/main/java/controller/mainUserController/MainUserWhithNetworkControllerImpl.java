@@ -1,13 +1,13 @@
 package controller.mainUserController;
 
 import dao.QuestionDao;
-import util.network.Networking;
+import util.network.ClientNetworking;
 
 public class MainUserWhithNetworkControllerImpl implements MainUserController {
-    private Networking networkConnection;
+    private ClientNetworking networkConnection;
     private QuestionDao questionDao;
 
-    public MainUserWhithNetworkControllerImpl(Networking networkConnection, QuestionDao questionDao) {
+    public MainUserWhithNetworkControllerImpl(ClientNetworking networkConnection, QuestionDao questionDao) {
         this.networkConnection = networkConnection;
         this.questionDao = questionDao;
     }
@@ -27,7 +27,7 @@ public class MainUserWhithNetworkControllerImpl implements MainUserController {
         return false;
     }
 
-    public void setNetworkConnection(Networking networkConnection) {
+    public void setNetworkConnection(ClientNetworking networkConnection) {
         this.networkConnection = networkConnection;
     }
 

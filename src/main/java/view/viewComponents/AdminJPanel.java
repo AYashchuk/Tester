@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class AdminJPanel extends MainJPanel {
     private MainAdminController mainAdminController;
     private JTabbedPane tabbedPane;
-    private JLabel ip = new JLabel("Servers IP:192.168.1.2");
+    private JLabel ip = new JLabel("Servers IP:");
     private JButton startStop = new JButton("Start server");
     private JLabel state = new JLabel("State: ");
     private JButton addQ = new JButton("add Question");
@@ -155,5 +155,9 @@ public class AdminJPanel extends MainJPanel {
 
     public MainAdminController getMainAdminController() {
         return mainAdminController;
+    }
+
+    public void setIp(String ip) {
+        this.ip.setText(ip);
     }
 }

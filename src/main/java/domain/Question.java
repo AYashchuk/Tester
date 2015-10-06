@@ -18,5 +18,27 @@ public class Question {
     String rightAnswer;
 
 
+    public String getText() {
+        return text;
+    }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String[] getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String[] answer) {
+        this.answer = answer;
+    }
+
+    public String getRightAnswer() {
+        return rightAnswer;
+    }
+
+    public void setRightAnswer(String rightAnswer) {
+        this.rightAnswer = rightAnswer;
+    }
 }

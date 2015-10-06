@@ -2,7 +2,7 @@ package util.network;
 
 import domain.Massage;
 
-public class Client extends Thread implements Networking {
+public class Client extends Thread implements ClientNetworking {
 
 
 
@@ -22,12 +22,12 @@ public class Client extends Thread implements Networking {
     }
 
     @Override
-    public Massage receive() {
+    public Massage receiveMassage() {
         return null;
     }
 
     @Override
-    public boolean send(Massage massage) {
+    public boolean sendMassage(Massage massage) {
         return false;
     }
 

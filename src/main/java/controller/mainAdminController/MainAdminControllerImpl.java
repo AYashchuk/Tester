@@ -1,6 +1,8 @@
 package controller.mainAdminController;
 
 import util.network.ServerNetworking;
+import view.MainFrame;
+import view.viewComponents.AdminJPanel;
 
 public class MainAdminControllerImpl implements MainAdminController{
     private ServerNetworking networking;
@@ -10,9 +12,12 @@ public class MainAdminControllerImpl implements MainAdminController{
     }
 
 
+
     @Override
     public void startStopServer() {
         networking.startStopServer();
+        AdminJPanel adminJPanel = (AdminJPanel) MainFrame.getInstance().getjPanel();
+        adminJPanel.setIp(networking.getCurrentIP());
     }
 
     @Override
