@@ -109,7 +109,7 @@ public class UsersJPanel extends MainJPanel {
             public void actionPerformed(ActionEvent e) {
                 final JFrame test = new JFrame("Connect on server");
                 final JButton ok = new JButton("Ok");
-                JTextField Ip = new JTextField("192.168.1.3");
+                final JTextField Ip = new JTextField("192.168.1.3");
                 test.setResizable(false);
                 test.setVisible(true);
                 test.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);

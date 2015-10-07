@@ -62,7 +62,7 @@ public class Server implements ServerNetworking {
         private ServerSocket serverSocket;
         private Socket currentClient;
         private final int PORT;
-        private List<Socket> clients = new ArrayList<>();
+        private List<Socket> clients = new ArrayList<Socket>();
         private InetAddress addr;
         private String myLANIP;
 
