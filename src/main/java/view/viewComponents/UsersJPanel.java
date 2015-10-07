@@ -20,7 +20,6 @@ public class UsersJPanel extends MainJPanel {
     public UsersJPanel(String login,  MainUserController mainUserController,Boolean isAdminCreated) {
         super(login);
         this.isAdminCreated = isAdminCreated;
-
         this.mainUserController = mainUserController;
 
         questions = new ArrayList<Checkbox>();
@@ -110,6 +109,7 @@ public class UsersJPanel extends MainJPanel {
             public void actionPerformed(ActionEvent e) {
                 final JFrame test = new JFrame("Connect on server");
                 final JButton ok = new JButton("Ok");
+                JTextField Ip = new JTextField("192.168.1.3");
                 test.setResizable(false);
                 test.setVisible(true);
                 test.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -118,12 +118,12 @@ public class UsersJPanel extends MainJPanel {
                 testConnection.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(mainUserController.testConnection()){
-                            state.setText("<html><font color = green>Connection accept!"+"</font>");
-                            ok.setEnabled(true);
-                        }else{
-                            state.setText("<html><font color = red>"+"Can`t connect on server...</font>");
-                        }
+                            String ip = Ip.getText().trim();
+                            if(mainUserController.connectOnServer(ip,8088)){
+                                state.setText("<html><font color = green>Connection accept!"+"</font>");
+                            } else state.setText("<html><font color = red>Cannot connection on server!"+"</font>");
+
+
 
                     }
                 });
@@ -139,8 +139,10 @@ public class UsersJPanel extends MainJPanel {
                 disconnect.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(mainUserController.disconnectFromServer()) state.setText("<html><font color = green>"+"Disconnect...</font>");
-                        else state.setText("<html><font color = red>"+"Connection error, try again...</font>");
+                        if(mainUserController != null){
+                            mainUserController.disconnectFromServer();
+                            state.setText("<html><font color = green>"+"Disconnect...</font>");
+                        }
                     }
                 });
 
@@ -150,10 +152,9 @@ public class UsersJPanel extends MainJPanel {
                 Box box2 = Box.createHorizontalBox();
                 Box box1 = Box.createHorizontalBox();
                 JLabel loginLabel = new JLabel("Enter servers ip:");
-                JTextField ip = new JTextField("192.168.1.3");
                 box1.add(loginLabel);
                 box1.add(Box.createHorizontalStrut(6));
-                box1.add(ip);
+                box1.add(Ip);
 
 
                 box2.add(ok);

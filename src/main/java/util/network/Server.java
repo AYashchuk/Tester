@@ -82,18 +82,21 @@ public class Server implements ServerNetworking {
 
         @Override
         public void run(){
-            log.info("start running...");
+            log.info("Start server...");
             System.out.println(serverSocket.getInetAddress().getHostAddress());
-            System.out.println("waiting new client...");
             while (!isInterrupted()){
-                log.info("in while");
                 try {
+                    log.info("Server waiting new client...");
                     currentClient = serverSocket.accept();
+                    log.info("New client connect!!!  "   + currentClient.getInetAddress());
+                    ClientProcess clientProcess = new ClientProcess(currentClient);
+                    log.info("Start new Client thread...");
+                    clientProcess.start();
+                    log.info("Clients thread start!");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
             log.info("stop running.");
         }
 
@@ -135,8 +138,11 @@ public class Server implements ServerNetworking {
 
         ClientProcess(Socket socket){
             try {
+                log.info("Create IOStreams...");
                 oos = new ObjectOutputStream(socket.getOutputStream());
+                System.out.println(1);
                 ois = new ObjectInputStream(socket.getInputStream());
+                log.info("Create IOStreams is created!");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -145,6 +151,7 @@ public class Server implements ServerNetworking {
 
         @Override
         public void run(){
+
             Scanner scan = new Scanner(ois);
             while(!isInterrupted()){
                 if(scan.hasNext()){

@@ -1,7 +1,7 @@
 package controller.mainUserController;
 
 public interface MainUserController {
-    boolean connectOnServer();
+    boolean connectOnServer(String ip, int port);
     boolean testConnection();
-    boolean disconnectFromServer();
+    void disconnectFromServer();
 }

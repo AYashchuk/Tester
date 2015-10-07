@@ -2,7 +2,7 @@ package controller.mainUserController;
 
 public class MainUserWithoutNetworkController implements MainUserController {
     @Override
-    public boolean connectOnServer() {
+    public boolean connectOnServer(String ip, int port) {
         return false;
     }
 
@@ -12,7 +12,7 @@ public class MainUserWithoutNetworkController implements MainUserController {
     }
 
     @Override
-    public boolean disconnectFromServer() {
-        return false;
+    public void disconnectFromServer() {
+
     }
 }
