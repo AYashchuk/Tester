@@ -1,6 +1,7 @@
 package util.network;
 
 import domain.Massage;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,6 +10,7 @@ import java.net.Socket;
 
 
 public class Client extends Thread implements ClientNetworking {
+    private static Logger log = Logger.getLogger(Client.class);
     private Socket socket;
     private final String HOST;
     private final int PORT;
@@ -25,10 +27,15 @@ public class Client extends Thread implements ClientNetworking {
     @Override
     public boolean connectOnServer() {
         try {
+            log.info("Create connection...");
             socket = new Socket(HOST,PORT);
+            log.info("Connection create!");
+            log.info("Create IOStreams...");
             oos = new ObjectOutputStream(socket.getOutputStream());
             ois = new ObjectInputStream(socket.getInputStream());
+            log.info("IOStreams is created! ");
             oos.writeObject(new Massage("%test",null,null));
+            log.info("Massage send!");
             return true;
         } catch (IOException e) {
             e.printStackTrace();

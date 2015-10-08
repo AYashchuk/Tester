@@ -38,7 +38,11 @@ public class Massage implements Serializable {
 
     @Override
     public String toString(){
-        return "[sysMSG = " + systemMSG + "]; [question = " + question.getText() + "]; " + "[date = " + date + "]" ;
+        String s = "[sysMSG = " + systemMSG+"] ";
+        if(question != null) s += "[question = " + question.getText() + "] ";
+        if(user != null) s += "[user = " + user.login + "] ";
+        s += "[date = " + date + "]";
+        return s;
     }
 
 

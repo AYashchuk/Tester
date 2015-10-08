@@ -140,8 +140,13 @@ public class Server implements ServerNetworking {
             try {
                 log.info("Create IOStreams...");
                 oos = new ObjectOutputStream(socket.getOutputStream());
-                System.out.println(1);
                 ois = new ObjectInputStream(socket.getInputStream());
+                try {
+                    Massage massage = (Massage) ois.readObject();
+                    System.out.println(massage);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 log.info("Create IOStreams is created!");
             } catch (IOException e) {
                 e.printStackTrace();

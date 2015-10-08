@@ -21,7 +21,6 @@ public class MainUserWhithNetworkControllerImpl implements MainUserController {
                 Client client = new Client(ip, 8088);
                 client.start();
                 networkConnection = client;
-                networkConnection.connectOnServer();
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();
