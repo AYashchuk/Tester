@@ -3,15 +3,16 @@ package domain;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Massage implements Serializable {
     private String systemMSG;
-    private Question question;
+    private List<Question> question;
     private User user;
     private String date;
     private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy.hh:mm");
 
-    public Massage(String systemMSG, Question question, User user) {
+    public Massage(String systemMSG, List<Question> question, User user) {
         this.systemMSG = systemMSG;
         this.question = question;
         this.user = user;
@@ -24,7 +25,7 @@ public class Massage implements Serializable {
         this.date = format.format(new Date());
     }
 
-    public Massage(String systemMSG, Question question) {
+    public Massage(String systemMSG, List<Question> question) {
         this.systemMSG = systemMSG;
         this.question = question;
         this.date = format.format(new Date());
@@ -39,7 +40,6 @@ public class Massage implements Serializable {
     @Override
     public String toString(){
         String s = "[sysMSG = " + systemMSG+"] ";
-        if(question != null) s += "[question = " + question.getText() + "] ";
         if(user != null) s += "[user = " + user.login + "] ";
         s += "[date = " + date + "]";
         return s;
